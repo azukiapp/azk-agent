@@ -1,0 +1,4 @@
+---
+- name: apt-get update
+  command: apt-get upgrade
+  sudo: yes

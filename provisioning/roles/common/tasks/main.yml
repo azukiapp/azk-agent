@@ -1,0 +1,7 @@
+---
+#- name: $base_dir directory
+  #file: dest={{ base_dir }} mode=755 owner={{ user }} group={{ group }} state=directory
+  #sudo: yes
+
+#- name: $cache_dir directory
+  #file: dest={{ cache_dir }} mode=755 owner={{ user }} group={{ group }} state=directory

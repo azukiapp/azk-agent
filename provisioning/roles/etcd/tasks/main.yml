@@ -1,0 +1,28 @@
+---
+- name: Clone etcd
+  get_url: url={{ etcd_url }}
+           dest=/usr/local/src/{{ etcd_tar }}
+
+- name: Extract etcd
+  command: chdir=/usr/local/src
+           tar xzf {{ etcd_tar }}
+           creates=/usr/local/src/{{ etcd_pkg }}/etcd
+
+- name: Move etcd to /usr/bin
+  file: src=/usr/local/src/{{ etcd_pkg }}/{{ item }} dest=/usr/bin/{{ item }} mode=755 owner=root group=root state=link force=yes
+  with_items:
+    - etcd
+    - etcdctl
+  notify:
+    - restart etcd
+
+- name: Create data directory
+  file: path=/var/data/etcd
+        state=directory
+  notify:
+    - restart etcd
+
+- name: Copy init script for etcd server
+  template: src=etcd.upstart.j2 dest=/etc/init/etcd.conf
+  notify:
+    - restart etcd

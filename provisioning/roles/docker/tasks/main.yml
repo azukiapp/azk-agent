@@ -1,0 +1,29 @@
+---
+- name: Add docker repository key
+  apt_key: url={{ docker_url }}/gpg state=present
+  sudo: yes
+  tags: repo
+
+- name: Add docker repository
+  copy: content='deb {{ docker_url }}/ubuntu docker main' dest={{ docker_repo_file }} owner=root group=root mode=644
+  sudo: yes
+
+- name: Add docker group
+  group: name=docker state=present
+  notify:
+    - restart docker
+
+- name: Add user {{ user }} in group
+  user: name={{ user }} state=present append=yes groups=docker
+  notify:
+    - restart docker
+
+- name: Install docker
+  apt: pkg=lxc-docker state=latest update_cache=yes
+  sudo: yes
+  tags: repo
+  notify:
+    - restart docker
+
+- name: Pull ubuntu base image
+  command: docker pull ubuntu:12.04
