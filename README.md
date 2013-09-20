@@ -12,14 +12,14 @@ useds by azk cli to execute a Azuki Dev Envirotment.
 
 2) Clone this project and get it running!
 
-```
+```bash
 git clone https://github.com/azukiapp/azk-agent/
 cd azk-agent
 ```
 
 3) Startup
 
-```
+```bash
 vagrant up
 ```
 
