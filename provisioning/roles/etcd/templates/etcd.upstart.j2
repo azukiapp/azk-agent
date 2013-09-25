@@ -3,4 +3,4 @@ description "etcd service registry"
 start on started
 stop on shutdown
 
-exec /usr/bin/etcd -d /var/data/etcd/config -n config -c 0.0.0.0:4001
+exec /usr/bin/etcd -d /var/data/etcd/config -n config -c {{ etcd_host }}:{{ etcd_port }}

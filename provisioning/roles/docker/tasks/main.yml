@@ -18,12 +18,24 @@
   notify:
     - restart docker
 
-- name: Install docker
-  apt: pkg=lxc-docker state=latest update_cache=yes
+- file: dest=/var/lib/docker state=directory owner=root group=root
+  register: last_result
+
+- name: Unpack ubuntu image
+  command: tar -xf /azk/docker.tar -C /var/lib
+  when: last_result.changed
   sudo: yes
-  tags: repo
   notify:
     - restart docker
 
-- name: Pull ubuntu base image
-  command: docker pull ubuntu:12.04
+- name: Install docker
+  apt: pkg=lxc-docker state=latest update_cache=yes
+  sudo: yes
+  notify:
+    - restart docker
+
+- name: be sure docker is running and enabled
+  service: name=docker state=running enabled=yes
+
+#- name: Pull ubuntu base image
+  #command: docker pull ubuntu:12.04

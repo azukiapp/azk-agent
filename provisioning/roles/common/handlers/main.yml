@@ -2,3 +2,6 @@
 - name: apt-get update
   command: apt-get upgrade
   sudo: yes
+
+- name: restart ntpd
+  service: name=ntpd state=restarted

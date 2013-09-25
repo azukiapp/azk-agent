@@ -1,7 +1,17 @@
 ---
-#- name: $base_dir directory
-  #file: dest={{ base_dir }} mode=755 owner={{ user }} group={{ group }} state=directory
-  #sudo: yes
+- name: Installing basic packages
+  apt: pkg='python-httplib2' update_cache=yes
+  sudo: yes
 
-#- name: $cache_dir directory
-  #file: dest={{ cache_dir }} mode=755 owner={{ user }} group={{ group }} state=directory
+- name: ensure ntpd is at the latest version
+  apt: pkg=ntp state=latest
+  notify:
+  - restart ntpd
+
+- name: $azkagent_root_dir directory
+  file: dest={{ azkagent_root_dir }} mode=755 owner={{ user }} group={{ group }} state=directory
+  sudo: yes
+
+- name: $azkagent_download_dir directory
+  file: dest={{ azkagent_download_dir }} mode=755 owner={{ user }} group={{ group }} state=directory
+  sudo: yes

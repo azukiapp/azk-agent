@@ -1,0 +1,4 @@
+---
+azkagent_host_ip: ${ansible_eth1.ipv4.address}
+azkagent_root_dir: /azk
+azkagent_download_dir: /azk/download

@@ -1,3 +1,4 @@
 ---
 docker_url: 'http://get.docker.io'
 docker_repo_file: '/etc/apt/sources.list.d/docker_repo.list'
+docker_dir: $azkagent_root_dir/docker
