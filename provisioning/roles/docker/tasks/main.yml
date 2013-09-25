@@ -1,12 +1,10 @@
 ---
 - name: Add docker repository key
   apt_key: url={{ docker_url }}/gpg state=present
-  sudo: yes
   tags: repo
 
 - name: Add docker repository
   copy: content='deb {{ docker_url }}/ubuntu docker main' dest={{ docker_repo_file }} owner=root group=root mode=644
-  sudo: yes
 
 - name: Add docker group
   group: name=docker state=present
@@ -24,13 +22,11 @@
 - name: Unpack ubuntu image
   command: tar -xf /azk/docker.tar -C /var/lib
   when: last_result.changed
-  sudo: yes
   notify:
     - restart docker
 
 - name: Install docker
   apt: pkg=lxc-docker state=latest update_cache=yes
-  sudo: yes
   notify:
     - restart docker
 
