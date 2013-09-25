@@ -7,4 +7,3 @@
     - common
     - dnsmasq
     - docker
-    - etcd
