@@ -7,3 +7,4 @@
     - common
     - dnsmasq
     - docker
+    - redis
