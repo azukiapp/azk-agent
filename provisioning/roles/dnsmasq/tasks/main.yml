@@ -1,0 +1,21 @@
+---
+# improvements:
+# Replace default config by dinamic version to use etcd
+- name: Install dnsmasq
+  apt: pkg='dnsmasq'
+
+- name: enable /etc/dnsmasq.d
+  lineinfile: dest=/etc/dnsmasq.conf regexp="^conf-dir" insertafter="^#conf-dir" line="conf-dir=/etc/dnsmasq.d" backup=yes
+  notify:
+    - restart dnsmasq
+
+- name: Configure dns {{ item }}
+  template: src={{ item }}.j2 dest=/etc/dnsmasq.d/{{ item }} owner=root group=root
+  with_items:
+    - dev.azk.io
+    - azk
+  notify:
+    - restart dnsmasq
+
+- name: be sure dnsmasq is running and enabled
+  service: name=dnsmasq state=running enabled=yes
