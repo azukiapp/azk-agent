@@ -5,6 +5,8 @@
     group: vagrant
   roles:
     - common
-    - dnsmasq
     - docker
+    - hellobits_repository
     - redis
+    - nginx
+    - dnsmasq

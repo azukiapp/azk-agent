@@ -1,0 +1,32 @@
+---
+- file: dest={{ azkagent_root_dir }}/nginx owner={{ user }} group={{ group }} mode=0744 state=directory
+
+- name: install nginx
+  apt: pkg=nginx-plus state=present update_cache=yes
+  sudo: yes
+  notify:
+    - restart nginx
+
+- name: get lua resty redis
+  git: repo=https://github.com/agentzh/lua-resty-redis dest={{ nginx_conf_dir }}/lua-resty-redis version=v0.16
+  notify:
+    - restart nginx
+
+- template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf owner=root group=root mode=0644
+  sudo: yes
+  notify:
+    - restart nginx
+
+- template: src=nginx_azk.conf.j2 dest={{ nginx_conf_dir }}/nginx_azk.conf owner={{ user }} group={{ group }} mode=0644
+  notify:
+    - restart nginx
+
+- copy: src={{ item }} dest={{ nginx_conf_dir }}/{{ item }} owner={{ user }} group={{ group }}
+  with_items:
+    - access_hipache.lua
+    - header_hipache.lua
+  notify:
+    - restart nginx
+
+- name: be sure nginx is running and enabled
+  service: name=nginx state=running enabled=yes

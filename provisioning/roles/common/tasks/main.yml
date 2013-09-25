@@ -1,6 +1,9 @@
 ---
 - name: Installing basic packages
-  apt: pkg='python-httplib2' update_cache=yes
+  apt: pkg={{ item }} update_cache=yes
+  with_items:
+    - python-httplib2
+    - git-core
 
 - name: ensure ntpd is at the latest version
   apt: pkg=ntp state=latest

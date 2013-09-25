@@ -1,0 +1,27 @@
+server {
+  server_name *.dev.azk.io *.azk;
+
+  location / {
+    set $http_x_debug on;
+    set $backend '';
+    set $backends_len '';
+    set $backend_id '';
+    set $frontend '';
+    set $vhost '';
+
+    # lua_code_cache off;
+    access_by_lua_file '{{ nginx_conf_dir }}/access_hipache.lua';
+
+    if ($http_x_debug) {
+      add_header X-Debug-Backend-Url $backend;
+      add_header X-Debug-Backend-Id $backend_id;
+      add_header X-Debug-Vhost $vhost;
+      add_header X-Debug-Frontend-Key $frontend;
+    }
+
+    proxy_pass $backend;
+
+    header_filter_by_lua_file '{{ nginx_conf_dir }}/header_hipache.lua';
+  }
+}
+

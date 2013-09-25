@@ -1,0 +1,8 @@
+---
+- name: adding key for hellobits repository
+  apt_key: url={{ hellobits_repo_url }}/hellobits.key state=present
+
+- name: adding repository hellobits
+  copy: content='deb {{ hellobits_repo_url }} precise main' dest={{ hellobits_repo_file }} owner=root group=root mode=644
+  notify:
+    - apt-get update

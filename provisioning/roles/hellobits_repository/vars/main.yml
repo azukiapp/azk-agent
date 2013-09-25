@@ -1,0 +1,3 @@
+---
+hellobits_repo_url: http://apt.hellobits.com/
+hellobits_repo_file: /etc/apt/sources.list.d/hellobits_repo.list
