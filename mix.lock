@@ -1,0 +1,7 @@
+[ "cowboy": {:git, "git://github.com/extend/cowboy.git", "2b2829f5855e4b2a6ba5e0ca5ccefd42fa2e9524", []},
+  "cowlib": {:git, "git://github.com/extend/cowlib.git", "2f35af5b0a67f591dde5ae4305a9587988a37c0c", [{:ref, "0.1.0"}]},
+  "dynamo": {:git, "git://github.com/elixir-lang/dynamo.git", "aca53b8d47a404bba64a0a2edf8afee868f95711", [{:tag, "elixir-0.10.2"}]},
+  "jsx": {:git, "git://github.com/talentdeficit/jsx.git", "e50af6e109cb03bd26acf715cbc77de746507d1d", []},
+  "mimetypes": {:git, "git://github.com/spawngrid/mimetypes.git", "47d37a977a7d633199822bf6b08353007483d00f", []},
+  "ranch": {:git, "git://github.com/extend/ranch.git", "41705752ffc7e3ecb96eef8374015ead4ca7f699", [{:ref, "0.8.5"}]},
+  "uuid": {:git, "git://github.com/avtobiff/erlang-uuid.git", "d7f64acd8412b79e854b8c95f4c66d8e071de8d9", [{:tag, "v0.4.4"}]} ]
