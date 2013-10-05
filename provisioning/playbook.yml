@@ -6,7 +6,4 @@
   roles:
     - common
     - docker
-    - hellobits_repository
-    - redis
-    - nginx
     - dnsmasq
