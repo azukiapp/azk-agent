@@ -10,6 +10,10 @@ defmodule AzkAgent.Utils.JSON do
     :jsx.encode(data, opts)
   end
 
+  def is_json(data, opts // []) do
+    :jsx.is_json(data, opts)
+  end
+
   defp pre_encode(value) when is_record(value, HashDict) do
     value.to_list
   end

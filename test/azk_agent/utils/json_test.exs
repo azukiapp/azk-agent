@@ -16,4 +16,11 @@ defmodule AzkAgent.Utils.JSON.Test do
     assert hash[:user], objt["user"]
     assert hash[:name], objt["name"]
   end
+
+  test "check is a json" do
+    assert JSON.is_json("[]")
+    assert JSON.is_json("[//Comment\n]", [:comments])
+    {:incomplete, func} = JSON.is_json("[")
+    assert is_function(func)
+  end
 end

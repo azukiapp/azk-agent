@@ -1,16 +1,14 @@
 defmodule ApiRouter do
-  use BaseRouter
+  use Api.BaseRouter
 
-  @root :jsx.encode([
+  @root JSON.encode [
     _links: [
-      [authentication: [ href: "/authetication" ]],
       [apps: [ href: "/apps" ]]
     ],
     version: "v0.0.1"
-  ])
+  ]
 
   get "/" do
-    base_conn(conn)
-      .resp(200,  @root)
+    base_conn(conn).resp(200,  @root)
   end
 end

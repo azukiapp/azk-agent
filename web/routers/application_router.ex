@@ -10,10 +10,5 @@ defmodule ApplicationRouter do
 
   # It is common to break your Dynamo into many
   # routers, forwarding the requests between them:
-  # forward "/posts", to: PostsRouter
-
-  get "/" do
-    conn = conn.assign(:title, "Welcome to Dynamo!")
-    render conn, "index.html"
-  end
+  forward "/api", to: ApiRouter
 end

@@ -1,1 +1,6 @@
 .vagrant/
+/ebin
+/deps
+/log
+/tmp
+erl_crash.dump
